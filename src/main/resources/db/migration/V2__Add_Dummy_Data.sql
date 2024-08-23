@@ -1,0 +1,2 @@
+INSERT INTO images (date_uploaded, label, tags)
+VALUES (CURRENT_DATE,NULL,'turbine,wind,generator,energy,electricity,power,environment,windmill,alternative,sky,mill,landscape,renewable,generation,electric,industry');

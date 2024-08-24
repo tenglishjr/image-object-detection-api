@@ -1,8 +1,14 @@
 package org.example.imageobjectdetectionapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Entity
 @Table(name = "images")
@@ -13,7 +19,8 @@ public class Image {
     private Long id;
 
     @Column(name = "date_uploaded", nullable = false)
-    private Date dateUploaded;
+    @CreatedDate
+    private LocalDateTime dateUploaded;
 
     @Column(name = "label")
     private String label;
@@ -21,10 +28,11 @@ public class Image {
     @Column(name = "tags")
     private String tags;
 
+
     public Image() {
     }
 
-    public Image(Long id, Date dateUploaded, String label, String tags) {
+    public Image(Long id, LocalDateTime dateUploaded, String label, String tags) {
         this.id = id;
         this.dateUploaded = dateUploaded;
         this.label = label;
@@ -35,7 +43,7 @@ public class Image {
         return id;
     }
 
-    public Date getDateUploaded() {
+    public LocalDateTime getDateUploaded() {
         return dateUploaded;
     }
 

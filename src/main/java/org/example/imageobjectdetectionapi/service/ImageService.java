@@ -9,16 +9,20 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ImageObjectDetectionService {
+public class ImageService {
 
     private final ImagesRepository imagesRepository;
+
+    public List<Image> findAll() {
+        return imagesRepository.findAll();
+    }
+
+    public Image findById(Long id) {
+        return imagesRepository.findById(id).orElse(null);
+    }
 
     public Image save(Image image) {
         Image savedImage = imagesRepository.save(image);
         return savedImage;
-    }
-
-    public List<Image> findAll() {
-        return imagesRepository.findAll();
     }
 }

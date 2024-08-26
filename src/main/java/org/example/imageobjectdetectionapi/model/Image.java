@@ -3,6 +3,7 @@ package org.example.imageobjectdetectionapi.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import org.example.imageobjectdetectionapi.dto.TagItem;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -28,7 +29,6 @@ public class Image {
     @Column(name = "tags")
     private String tags;
 
-
     public Image() {
     }
 
@@ -53,6 +53,18 @@ public class Image {
 
     public String getTags() {
         return tags;
+    }
+
+    public void setDateUploaded(LocalDateTime dateUploaded) {
+        this.dateUploaded = dateUploaded;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
 }

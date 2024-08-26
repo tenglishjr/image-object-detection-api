@@ -1,9 +1,9 @@
 package org.example.imageobjectdetectionapi.util;
 
+import org.example.imageobjectdetectionapi.dto.ImageRequest;
 import org.example.imageobjectdetectionapi.dto.ImaggaRO;
 import org.example.imageobjectdetectionapi.dto.TagItem;
 import org.example.imageobjectdetectionapi.model.Image;
-import org.example.imageobjectdetectionapi.dto.ImageRequest;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

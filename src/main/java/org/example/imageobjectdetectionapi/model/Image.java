@@ -1,15 +1,9 @@
 package org.example.imageobjectdetectionapi.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.example.imageobjectdetectionapi.dto.TagItem;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "images")

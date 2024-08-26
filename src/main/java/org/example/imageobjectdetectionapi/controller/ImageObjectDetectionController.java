@@ -1,8 +1,8 @@
 package org.example.imageobjectdetectionapi.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.imageobjectdetectionapi.model.Image;
 import org.example.imageobjectdetectionapi.dto.ImageRequest;
+import org.example.imageobjectdetectionapi.model.Image;
 import org.example.imageobjectdetectionapi.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

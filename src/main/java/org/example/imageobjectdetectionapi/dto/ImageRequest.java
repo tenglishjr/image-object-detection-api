@@ -8,20 +8,17 @@ import lombok.NonNull;
 @NoArgsConstructor
 public class ImageRequest {
 
-    @NonNull
-    private String imageUrl;
+	@NonNull
+	private String imageUrl;
 
-    private String label;
+	private String label;
 
-    private boolean useObjectDetection;
+	private boolean useObjectDetection;
 
-    @Override
-    public String toString() {
-        return "ImageRequest{" +
-                "imageUrl='" + imageUrl + '\'' +
-                ", label='" + label + '\'' +
-                ", useObjectDetection=" + useObjectDetection +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "ImageRequest{" + "imageUrl='" + imageUrl + '\'' + ", label='" + label + '\'' + ", useObjectDetection="
+				+ useObjectDetection + '}';
+	}
 
 }

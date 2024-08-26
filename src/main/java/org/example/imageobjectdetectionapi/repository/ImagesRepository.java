@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface ImagesRepository extends JpaRepository<Image, Long> {
 
-    @Query(nativeQuery = true, value = "select * from images where POSITION(ARRAY_TO_STRING(:objects, ',') in tags) > 0")
-    List<Image> findAllByTags(@Param("objects") String[] objects);
+	@Query(nativeQuery = true,
+			value = "select * from images where POSITION(ARRAY_TO_STRING(:objects, ',') in tags) > 0")
+	List<Image> findAllByTags(@Param("objects") String[] objects);
 
 }

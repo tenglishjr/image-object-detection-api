@@ -13,34 +13,36 @@ import java.util.List;
 @Service
 public class ImageService {
 
-    private final ImagesRepository imagesRepository;
-    private ImaggaService imaggaService;
+	private final ImagesRepository imagesRepository;
 
-    @Autowired
-    public ImageService(ImagesRepository imagesRepository, ImaggaService imaggaService) {
-        this.imagesRepository = imagesRepository;
-        this.imaggaService = imaggaService;
-    }
+	private ImaggaService imaggaService;
 
-    public List<Image> findAll() {
-        return imagesRepository.findAll();
-    }
+	@Autowired
+	public ImageService(ImagesRepository imagesRepository, ImaggaService imaggaService) {
+		this.imagesRepository = imagesRepository;
+		this.imaggaService = imaggaService;
+	}
 
-    public Image findById(Long id) {
-        return imagesRepository.findById(id).orElse(null);
-    }
+	public List<Image> findAll() {
+		return imagesRepository.findAll();
+	}
 
-    public List<Image> findAllWithObjects(String[] objects) {
-        return imagesRepository.findAllByTags(objects);
-    }
+	public Image findById(Long id) {
+		return imagesRepository.findById(id).orElse(null);
+	}
 
-    public Image saveImage(ImageRequest imageRequest) {
-        ImaggaRO imaggaRO = null;
-        if (imageRequest.isUseObjectDetection()) {
-            imaggaRO = imaggaService.getObjectDetection(imageRequest);
-        }
+	public List<Image> findAllWithObjects(String[] objects) {
+		return imagesRepository.findAllByTags(objects);
+	}
 
-        Image image = ImageMapper.mapToImage(imaggaRO, imageRequest);
-        return imagesRepository.save(image);
-    }
+	public Image saveImage(ImageRequest imageRequest) {
+		ImaggaRO imaggaRO = null;
+		if (imageRequest.isUseObjectDetection()) {
+			imaggaRO = imaggaService.getObjectDetection(imageRequest);
+		}
+
+		Image image = ImageMapper.mapToImage(imaggaRO, imageRequest);
+		return imagesRepository.save(image);
+	}
+
 }

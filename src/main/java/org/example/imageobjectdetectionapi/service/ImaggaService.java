@@ -27,45 +27,50 @@ import java.util.Base64;
 @Slf4j
 public class ImaggaService {
 
-    private final String URI = "https://api.imagga.com/v2";
-    @Value("${imaggaApiKey}")
-    private String imaggaApiKey;
-    @Value("${imaggaApiSecret}")
-    private String imaggaApiSecret;
-    @Value("${imaggaAuthHeader}")
-    private String imaggaAuthHeader;
+	private final String URI = "https://api.imagga.com/v2";
 
-    private RestTemplate restTemplate;
+	@Value("${imaggaApiKey}")
+	private String imaggaApiKey;
 
-    @Autowired
-    public ImaggaService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+	@Value("${imaggaApiSecret}")
+	private String imaggaApiSecret;
 
-    public ImaggaRO getObjectDetection(ImageRequest imageRequest) {
-        try {
-            String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";
-            String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
+	@Value("${imaggaAuthHeader}")
+	private String imaggaAuthHeader;
 
-            String image_url = "https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg";
+	private RestTemplate restTemplate;
 
-            String url = URI + "/tags?image_url=" + image_url + "&limit=10";
-            URL urlObject = new URL(url);
-            HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
+	@Autowired
+	public ImaggaService(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
 
-            connection.setRequestProperty("Authorization", "Basic " + basicAuth);
+	public ImaggaRO getObjectDetection(ImageRequest imageRequest) {
+		try {
+			String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";
+			String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
 
-            BufferedReader connectionInput = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String image_url = "https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg";
 
-            String jsonResponse = connectionInput.readLine();
+			String url = URI + "/tags?image_url=" + image_url + "&limit=10";
+			URL urlObject = new URL(url);
+			HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
 
-            connectionInput.close();
+			connection.setRequestProperty("Authorization", "Basic " + basicAuth);
 
-            return new Gson().fromJson(jsonResponse, ImaggaRO.class);
-        } catch (Exception e) {
-            log.error("Something went wrong getting object tags from Imagga");
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Tag retrieval failed -- " + e.getMessage());
-        }
-    }
+			BufferedReader connectionInput = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+			String jsonResponse = connectionInput.readLine();
+
+			connectionInput.close();
+
+			return new Gson().fromJson(jsonResponse, ImaggaRO.class);
+		}
+		catch (Exception e) {
+			log.error("Something went wrong getting object tags from Imagga");
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+					"Tag retrieval failed -- " + e.getMessage());
+		}
+	}
 
 }

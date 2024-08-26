@@ -15,56 +15,56 @@ import java.util.Map;
 @Table(name = "images")
 public class Image {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(name = "date_uploaded", nullable = false)
-    @CreatedDate
-    private LocalDateTime dateUploaded;
+	@Column(name = "date_uploaded", nullable = false)
+	@CreatedDate
+	private LocalDateTime dateUploaded;
 
-    @Column(name = "label")
-    private String label;
+	@Column(name = "label")
+	private String label;
 
-    @Column(name = "tags")
-    private String tags;
+	@Column(name = "tags")
+	private String tags;
 
-    public Image() {
-    }
+	public Image() {
+	}
 
-    public Image(Long id, LocalDateTime dateUploaded, String label, String tags) {
-        this.id = id;
-        this.dateUploaded = dateUploaded;
-        this.label = label;
-        this.tags = tags;
-    }
+	public Image(Long id, LocalDateTime dateUploaded, String label, String tags) {
+		this.id = id;
+		this.dateUploaded = dateUploaded;
+		this.label = label;
+		this.tags = tags;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public LocalDateTime getDateUploaded() {
-        return dateUploaded;
-    }
+	public LocalDateTime getDateUploaded() {
+		return dateUploaded;
+	}
 
-    public String getLabel() {
-        return label;
-    }
+	public String getLabel() {
+		return label;
+	}
 
-    public String getTags() {
-        return tags;
-    }
+	public String getTags() {
+		return tags;
+	}
 
-    public void setDateUploaded(LocalDateTime dateUploaded) {
-        this.dateUploaded = dateUploaded;
-    }
+	public void setDateUploaded(LocalDateTime dateUploaded) {
+		this.dateUploaded = dateUploaded;
+	}
 
-    public void setLabel(String label) {
-        this.label = label;
-    }
+	public void setLabel(String label) {
+		this.label = label;
+	}
 
-    public void setTags(String tags) {
-        this.tags = tags;
-    }
+	public void setTags(String tags) {
+		this.tags = tags;
+	}
 
 }

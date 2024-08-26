@@ -7,8 +7,11 @@ import java.math.BigDecimal;
 
 @Getter
 public class TagItem {
-    @JsonProperty("confidence")
-    private BigDecimal confidence;
-    @JsonProperty("tag")
-    private Tag tag;
+
+	@JsonProperty("confidence")
+	private BigDecimal confidence;
+
+	@JsonProperty("tag")
+	private Tag tag;
+
 }

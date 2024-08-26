@@ -8,8 +8,11 @@ import java.util.List;
 
 @Getter
 public class Result {
-    @JsonProperty("tags")
-    private List<TagItem> tags;
-    @JsonProperty("status")
-    private Status status;
+
+	@JsonProperty("tags")
+	private List<TagItem> tags;
+
+	@JsonProperty("status")
+	private Status status;
+
 }

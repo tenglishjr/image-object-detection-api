@@ -5,8 +5,11 @@ import lombok.Getter;
 
 @Getter
 public class ImaggaRO {
-    @JsonProperty("result")
-    private Result result;
-    @JsonProperty("status")
-    private Status status;
+
+	@JsonProperty("result")
+	private Result result;
+
+	@JsonProperty("status")
+	private Status status;
+
 }

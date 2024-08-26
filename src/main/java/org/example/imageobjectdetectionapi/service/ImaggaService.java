@@ -50,9 +50,7 @@ public class ImaggaService {
 			String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";
 			String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
 
-			String image_url = "https://imagga.com/static/images/tagging/wind-farm-538576_640.jpg";
-
-			String url = URI + "/tags?image_url=" + image_url + "&limit=10";
+			String url = URI + "/tags?image_url=" + imageRequest.getImageUrl() + "&limit=10";
 			URL urlObject = new URL(url);
 			HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
 

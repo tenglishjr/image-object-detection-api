@@ -23,6 +23,9 @@ public class Image {
 	@CreatedDate
 	private LocalDateTime dateUploaded;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
 	@Column(name = "label")
 	private String label;
 
@@ -32,9 +35,10 @@ public class Image {
 	public Image() {
 	}
 
-	public Image(Long id, LocalDateTime dateUploaded, String label, String tags) {
+	public Image(Long id, LocalDateTime dateUploaded, String imageUrl, String label, String tags) {
 		this.id = id;
 		this.dateUploaded = dateUploaded;
+        this.imageUrl = imageUrl;
 		this.label = label;
 		this.tags = tags;
 	}
@@ -47,7 +51,19 @@ public class Image {
 		return dateUploaded;
 	}
 
-	public String getLabel() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getLabel() {
 		return label;
 	}
 

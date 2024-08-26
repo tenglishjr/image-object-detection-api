@@ -22,6 +22,7 @@ public class ImageMapper {
 		String label = null == imageRequest.getLabel() ? ImageUtils.labelGenerator() : imageRequest.getLabel();
 		image.setLabel(label);
 		image.setDateUploaded(LocalDateTime.now());
+        image.setImageUrl(imageRequest.getImageUrl());
 
 		return image;
 	}

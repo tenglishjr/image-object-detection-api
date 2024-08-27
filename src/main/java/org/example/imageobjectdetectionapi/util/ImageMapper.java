@@ -17,7 +17,7 @@ public class ImageMapper {
 
         if (null != imaggaRO) {
             List<ImageTag> tags = mapToImageTag(imaggaRO.getResult().getTags());
-            image.setTags(tags);
+            image.setImageTags(tags);
         }
 
         String label = null == imageRequest.getLabel() ? ImageUtils.labelGenerator() : imageRequest.getLabel();
@@ -38,13 +38,4 @@ public class ImageMapper {
         }
         return imageTags;
     }
-
-    private static String tagsAsString(List<TagItem> tagItems) {
-        List<String> tags = new ArrayList<>();
-        for (TagItem tagItem : tagItems) {
-            tags.add(tagItem.getTag().toString());
-        }
-        return String.join(",", tags);
-    }
-
 }

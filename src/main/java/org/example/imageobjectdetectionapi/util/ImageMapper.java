@@ -1,10 +1,10 @@
 package org.example.imageobjectdetectionapi.util;
 
-import org.example.imageobjectdetectionapi.dto.ImageRequest;
-import org.example.imageobjectdetectionapi.dto.ImaggaRO;
-import org.example.imageobjectdetectionapi.dto.TagItem;
-import org.example.imageobjectdetectionapi.model.Image;
-import org.example.imageobjectdetectionapi.model.ImageTag;
+import org.example.imageobjectdetectionapi.model.ImageRequest;
+import org.example.imageobjectdetectionapi.model.ImaggaWebResponse;
+import org.example.imageobjectdetectionapi.model.TagItem;
+import org.example.imageobjectdetectionapi.entity.Image;
+import org.example.imageobjectdetectionapi.entity.ImageTag;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,11 +12,11 @@ import java.util.List;
 
 public class ImageMapper {
 
-    public static Image mapToImage(ImaggaRO imaggaRO, ImageRequest imageRequest) {
+    public static Image mapToImage(ImaggaWebResponse imaggaWebResponse, ImageRequest imageRequest) {
         Image image = new Image();
 
-        if (null != imaggaRO) {
-            List<ImageTag> tags = mapToImageTag(imaggaRO.getResult().getTags());
+        if (null != imaggaWebResponse) {
+            List<ImageTag> tags = mapToImageTag(imaggaWebResponse.getResult().getTags());
             image.setImageTags(tags);
         }
 

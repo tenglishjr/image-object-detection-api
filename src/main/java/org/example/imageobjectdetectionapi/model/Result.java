@@ -1,4 +1,4 @@
-package org.example.imageobjectdetectionapi.dto;
+package org.example.imageobjectdetectionapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

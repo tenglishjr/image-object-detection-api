@@ -1,4 +1,4 @@
-package org.example.imageobjectdetectionapi.model;
+package org.example.imageobjectdetectionapi.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;

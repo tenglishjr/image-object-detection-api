@@ -3,8 +3,8 @@ package org.example.imageobjectdetectionapi.service;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.imageobjectdetectionapi.dto.ImageRequest;
-import org.example.imageobjectdetectionapi.dto.ImaggaRO;
+import org.example.imageobjectdetectionapi.model.ImageRequest;
+import org.example.imageobjectdetectionapi.model.ImaggaWebResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,7 +24,7 @@ public class ImaggaService {
 	private final String URI = "https://api.imagga.com/v2";
 
     // TODO: Refactor to use RestTemplate/WebClient instead
-	public ImaggaRO getObjectDetection(ImageRequest imageRequest) {
+	public ImaggaWebResponse getObjectDetection(ImageRequest imageRequest) {
 		try {
 			String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";
 			String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
@@ -41,7 +41,7 @@ public class ImaggaService {
 
 			connectionInput.close();
 
-			return new Gson().fromJson(jsonResponse, ImaggaRO.class);
+			return new Gson().fromJson(jsonResponse, ImaggaWebResponse.class);
 		}
 		catch (Exception e) {
 			log.error("Something went wrong getting object tags from Imagga");

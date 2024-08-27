@@ -1,4 +1,4 @@
-package org.example.imageobjectdetectionapi.dto;
+package org.example.imageobjectdetectionapi.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

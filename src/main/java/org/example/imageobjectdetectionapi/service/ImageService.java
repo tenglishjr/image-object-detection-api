@@ -1,8 +1,8 @@
 package org.example.imageobjectdetectionapi.service;
 
-import org.example.imageobjectdetectionapi.dto.ImageRequest;
-import org.example.imageobjectdetectionapi.dto.ImaggaRO;
-import org.example.imageobjectdetectionapi.model.Image;
+import org.example.imageobjectdetectionapi.model.ImageRequest;
+import org.example.imageobjectdetectionapi.model.ImaggaWebResponse;
+import org.example.imageobjectdetectionapi.entity.Image;
 import org.example.imageobjectdetectionapi.repository.ImagesRepository;
 import org.example.imageobjectdetectionapi.util.ImageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +36,12 @@ public class ImageService {
 	}
 
 	public Image saveImage(ImageRequest imageRequest) {
-		ImaggaRO imaggaRO = null;
+		ImaggaWebResponse imaggaWebResponse = null;
 		if (imageRequest.isUseObjectDetection()) {
-			imaggaRO = imaggaService.getObjectDetection(imageRequest);
+			imaggaWebResponse = imaggaService.getObjectDetection(imageRequest);
 		}
 
-		Image image = ImageMapper.mapToImage(imaggaRO, imageRequest);
+		Image image = ImageMapper.mapToImage(imaggaWebResponse, imageRequest);
 		return imagesRepository.save(image);
 	}
 

@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS image_tags (
-    id SERIAL PRIMARY KEY,
-    image SERIAL NOT NULL,
-    tag VARCHAR(255) NOT NULL,
-    confidence DOUBLE NOT NULL
-);

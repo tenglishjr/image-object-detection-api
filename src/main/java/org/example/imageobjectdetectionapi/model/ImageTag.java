@@ -2,29 +2,32 @@ package org.example.imageobjectdetectionapi.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "image_tags")
 public class ImageTag {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Long id;
 
-	@Column(name = "image_id")
-	private Long imageId;
+//	@ManyToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "image")
+//	private Image image;
 
 	@Column(name = "tag")
 	private String tag;
 
-	@Column(name = "confidence")
-	private Double confidence;
+	@Column(name = "confidence", scale = 3)
+	private BigDecimal confidence;
 
 	public ImageTag() {
 	}
 
-	public ImageTag(Long id, Long imageId, String tag, Double confidence) {
+	public ImageTag(Long id, String tag, BigDecimal confidence) {
 		this.id = id;
-		this.imageId = imageId;
 		this.tag = tag;
 		this.confidence = confidence;
 	}
@@ -33,16 +36,33 @@ public class ImageTag {
 		return id;
 	}
 
-	public Long getImageId() {
-		return imageId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getTag() {
 		return tag;
 	}
 
-	public Double getConfidence() {
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public BigDecimal getConfidence() {
 		return confidence;
+	}
+
+	public void setConfidence(BigDecimal confidence) {
+		this.confidence = confidence.setScale(3, BigDecimal.ROUND_HALF_UP);
+	}
+
+	@Override
+	public String toString() {
+		return "ImageTag{" +
+				"id=" + id +
+				", tag='" + tag + '\'' +
+				", confidence=" + confidence +
+				'}';
 	}
 
 }

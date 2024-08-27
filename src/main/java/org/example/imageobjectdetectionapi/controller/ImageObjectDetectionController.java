@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -24,16 +23,14 @@ public class ImageObjectDetectionController {
 		this.imageService = imageService;
 	}
 
-	// ---- get all image data
 	@GetMapping(path = "/images")
 	@ResponseBody
 	public ResponseEntity<List<Image>> getAllImages(@RequestParam(name = "objects", required = false) String objects) {
 		List<Image> images;
 
 		if (objects != null) {
-			String[] tags = objects.replace("\"", "").split(",");
+			String[] tags = objects.toLowerCase().replace("\"", "").split(",");
 			images = imageService.findAllWithObjects(tags);
-			log.error("tags: " + Arrays.deepToString(tags));
 		}
 		else {
 			images = imageService.findAll();

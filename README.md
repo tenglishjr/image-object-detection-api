@@ -72,15 +72,6 @@ Start application
   ./gradlew clean build bootRun
 ```
 
-
-## Running Tests
-
-To run tests, run the following command
-
-```bash
-  ./gradlew test
-```
-
 ## Still to come...
 
 - Additional Tests

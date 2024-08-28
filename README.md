@@ -57,7 +57,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd path/to/image-object-detection-api
 ```
 
 Start Docker container

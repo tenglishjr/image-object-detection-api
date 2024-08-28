@@ -81,7 +81,7 @@ To run tests, run the following command
   ./gradlew test
 ```
 
-## Features still to come:
+## Still to come...
 
 - Additional Tests
 - CI/CD configuration

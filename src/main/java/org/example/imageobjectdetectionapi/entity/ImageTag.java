@@ -19,6 +19,11 @@ public class ImageTag {
 	@Column(name = "tag")
 	private String tag;
 
-	@Column(name = "confidence", scale = 3)
+	@Column(name = "confidence")
 	private BigDecimal confidence;
+
+	public void setConfidence(BigDecimal confidence) {
+		this.confidence = confidence.setScale(3, BigDecimal.ROUND_HALF_UP);
+	}
+
 }

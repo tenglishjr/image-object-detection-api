@@ -26,7 +26,7 @@ public class ImaggaService {
     // TODO: Refactor to use RestTemplate/WebClient instead
     public ImaggaWebResponse getObjectDetection(ImageRequest imageRequest) {
         try {
-            String url = "https://api.imagga.com/v2/tags?image_url=\"" + imageRequest.getImageUrl() + "\"&limit=10";
+            String url = "https://api.imagga.com/v2/tags?image_url=" + imageRequest.getImageUrl() + "&limit=10";
             URL urlObject = new URL(url);
 
             String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";

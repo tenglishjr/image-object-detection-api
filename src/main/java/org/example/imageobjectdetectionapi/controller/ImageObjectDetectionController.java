@@ -37,8 +37,8 @@ public class ImageObjectDetectionController {
                     : imageService.findAll();
 
             return null == images || images.isEmpty()
-                    ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-                    : new ResponseEntity<>(images, HttpStatus.OK);
+                    ? ResponseEntity.noContent().build()
+                    : ResponseEntity.ok(images);
         } catch (DataAccessException e) {
             log.error("An issue occurred while executing the query to retrieve images", e.getMessage(), e);
             return new ResponseEntity("There was an issue retrieving images -- " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -53,7 +53,7 @@ public class ImageObjectDetectionController {
     public ResponseEntity<Image> getImageById(@PathVariable(name = "imageId") long imageId) {
         try {
             Image image = imageService.findById(imageId);
-            return new ResponseEntity(image, HttpStatus.OK);
+            return ResponseEntity.ok(image);
         } catch (ImageNotFoundException e) {
             log.error("An issue occurred while executing the query to retrieve the image", e.getMessage(), e);
             return new ResponseEntity(e.getMessage(), HttpStatus.NOT_FOUND);
@@ -69,7 +69,7 @@ public class ImageObjectDetectionController {
         try {
             Image image = imageService.saveImage(imageRequest);
 
-            return new ResponseEntity(image, HttpStatus.OK);
+            return ResponseEntity.ok(image);
         } catch (DataAccessException e) {
             log.error("An issue occurred while executing the query to save the image", e.getMessage(), e);
             return new ResponseEntity("There was an issue saving the image", HttpStatus.INTERNAL_SERVER_ERROR);

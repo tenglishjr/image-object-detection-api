@@ -17,7 +17,7 @@ Service that ingests user images (via image URL), analyzes them for object detec
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `?objects` | `string` | Query parameter to filter images (ex: "dog,cat,mouse"|
+| `?objects` | `string` | Query parameter to filter images (ex: "dog,cat,mouse")|
 
 #### Get image
 
@@ -51,13 +51,13 @@ Service that ingests user images (via image URL), analyzes them for object detec
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone git@github.com:tenglishjr/image-object-detection-api.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd path/to/image-object-detection-api
 ```
 
 Start Docker container
@@ -72,16 +72,7 @@ Start application
   ./gradlew clean build bootRun
 ```
 
-
-## Running Tests
-
-To run tests, run the following command
-
-```bash
-  ./gradlew test
-```
-
-## Features still to come:
+## Still to come...
 
 - Additional Tests
 - CI/CD configuration

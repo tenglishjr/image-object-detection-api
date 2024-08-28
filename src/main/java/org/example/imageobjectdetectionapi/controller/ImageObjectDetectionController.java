@@ -1,10 +1,13 @@
 package org.example.imageobjectdetectionapi.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.imageobjectdetectionapi.exception.ImageNotFoundException;
+import org.example.imageobjectdetectionapi.exception.ImaggaBadRequestException;
 import org.example.imageobjectdetectionapi.model.ImageRequest;
 import org.example.imageobjectdetectionapi.entity.Image;
 import org.example.imageobjectdetectionapi.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,50 +19,63 @@ import java.util.List;
 @RequestMapping(path = "/api/v1/images")
 public class ImageObjectDetectionController {
 
-	ImageService imageService;
+    ImageService imageService;
 
-	@Autowired
-	public ImageObjectDetectionController(ImageService imageService) {
-		this.imageService = imageService;
-	}
+    @Autowired
+    public ImageObjectDetectionController(ImageService imageService) {
+        this.imageService = imageService;
+    }
 
-	@GetMapping
-	@ResponseBody
-	public ResponseEntity<List<Image>> getAllImages(@RequestParam(name = "objects", required = false) String objects) {
-		List<Image> images;
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity getAllImages(@RequestParam(name = "objects", required = false) String objects) {
+        try {
+            List<Image> images;
 
-		if (objects != null) {
-			String[] tags = objects.toLowerCase().replace("\"", "").split(",");
-			images = imageService.findAllWithObjects(tags);
-		}
-		else {
-			images = imageService.findAll();
-		}
+            images = null != objects ? imageService.findAllWithObjects(objects) : imageService.findAll();
 
-		return images == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT)
-				: new ResponseEntity<>(images, HttpStatus.OK);
-	}
+            return null == images || images.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(images);
+        } catch (DataAccessException e) {
+            log.error("An issue occurred while executing the query to retrieve images", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("There was an issue retrieving images -- " + e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
-	@GetMapping(path = "/{imageId}")
-	@ResponseBody
-	public ResponseEntity<Image> getImageById(@PathVariable(name = "imageId") long imageId) {
-		Image image = imageService.findById(imageId);
-		return image == null ? new ResponseEntity<>(HttpStatus.NO_CONTENT) : new ResponseEntity<>(image, HttpStatus.OK);
-	}
+    @GetMapping(path = "/{imageId}")
+    @ResponseBody
+    public ResponseEntity getImageById(@PathVariable(name = "imageId") long imageId) {
+        try {
+            Image image = imageService.findById(imageId);
+            return ResponseEntity.ok(image);
+        } catch (ImageNotFoundException e) {
+            log.error("An issue occurred while executing the query to retrieve the image", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
-	@PostMapping
-	@ResponseBody
-	public ResponseEntity<Image> addImage(@RequestBody ImageRequest imageRequest) {
-		log.error(imageRequest.toString());
-		try {
-			Image image = imageService.saveImage(imageRequest);
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity addImage(@RequestBody ImageRequest imageRequest) {
+        try {
+            Image image = imageService.saveImage(imageRequest);
 
-			return new ResponseEntity<>(image, HttpStatus.OK);
-		}
-		catch (Exception e) {
-			log.error(e.getMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+            return ResponseEntity.ok(image);
+        } catch (DataAccessException e) {
+            log.error("An issue occurred while executing the query to save the image", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("There was an issue saving the image");
+        } catch (ImaggaBadRequestException e) {
+            log.error("There was an issue sending the request to Imagga -- " + e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
 }

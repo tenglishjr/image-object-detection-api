@@ -17,7 +17,7 @@ Service that ingests user images (via image URL), analyzes them for object detec
 
 | Parameter | Type     | Description                |
 | :-------- | :------- | :------------------------- |
-| `?objects` | `string` | Query parameter to filter images (ex: "dog,cat,mouse"|
+| `?objects` | `string` | Query parameter to filter images (ex: "dog,cat,mouse")|
 
 #### Get image
 

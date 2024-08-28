@@ -20,7 +20,9 @@ public class ImageMapper {
             image.setImageTags(tags);
         }
 
-        String label = null == imageRequest.getLabel() || imageRequest.getLabel().equals("") ? ImageUtils.labelGenerator() : imageRequest.getLabel();
+        String label = null == imageRequest.getLabel() || imageRequest.getLabel().isEmpty()
+                ? ImageUtils.labelGenerator()
+                : imageRequest.getLabel();
         image.setLabel(label);
         image.setDateUploaded(LocalDateTime.now());
         image.setImageUrl(imageRequest.getImageUrl());

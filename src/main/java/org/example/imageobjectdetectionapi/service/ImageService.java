@@ -19,7 +19,7 @@ public class ImageService {
 
     private final ImagesRepository imagesRepository;
 
-    private ImaggaService imaggaService;
+    private final ImaggaService imaggaService;
 
     @Autowired
     public ImageService(ImagesRepository imagesRepository, ImaggaService imaggaService) {
@@ -40,6 +40,7 @@ public class ImageService {
     }
 
     public List<Image> findAllWithObjects(String objects) {
+        System.out.println("Objects: " + objects);
         String[] tags = objects.toLowerCase().replace("\"", "").split(",");
         return imagesRepository.findAllByTags(tags);
     }

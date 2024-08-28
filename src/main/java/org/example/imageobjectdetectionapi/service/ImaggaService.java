@@ -23,16 +23,14 @@ import java.util.Base64;
 @Slf4j
 public class ImaggaService {
 
-    private final String URI = "https://api.imagga.com/v2";
-
     // TODO: Refactor to use RestTemplate/WebClient instead
     public ImaggaWebResponse getObjectDetection(ImageRequest imageRequest) {
         try {
+            String url = "https://api.imagga.com/v2/tags?image_url=\"" + imageRequest.getImageUrl() + "\"&limit=10";
+            URL urlObject = new URL(url);
+
             String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";
             String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
-
-            String url = URI + "/tags?image_url=" + imageRequest.getImageUrl() + "&limit=10";
-            URL urlObject = new URL(url);
             HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
 
             connection.setRequestProperty("Authorization", "Basic " + basicAuth);

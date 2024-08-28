@@ -1,6 +1,7 @@
 package org.example.imageobjectdetectionapi.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +13,7 @@ import java.util.List;
 @Table(name = "images")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

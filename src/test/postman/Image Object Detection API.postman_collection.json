@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "6ce2407f-0feb-46b4-afde-b529faf1fd4b",
+		"name": "Image Object Detection API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37978597"
+	},
+	"item": [
+		{
+			"name": "Images",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/images",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Images Filtered by Objects",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/images?objects=\"hand,hair\"",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"images"
+					],
+					"query": [
+						{
+							"key": "objects",
+							"value": "\"hand,hair\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Image by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/images/6",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"images",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Image Object Detection & Save",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"imageUrl\": \"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/I-90-94_Entrance_at_Madison_Street%2C_Chicago_%2814560285196%29.jpg/1200px-I-90-94_Entrance_at_Madison_Street%2C_Chicago_%2814560285196%29.jpg\",\n    \"label\": \"Highway traffic\",\n    \"useObjectDetection\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/images",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"images"
+					]
+				},
+				"description": "Send image URL to Imagga for object detection, then save resulting image metadata."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}

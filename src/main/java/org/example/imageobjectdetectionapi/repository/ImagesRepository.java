@@ -12,7 +12,7 @@ import java.util.List;
 public interface ImagesRepository extends JpaRepository<Image, Long> {
 
 	@Query(nativeQuery = true,
-			value = "select i.* from images as i INNER JOIN image_tags as it ON i.id = it.tags_fkey where it.tag = ANY(:objects)")
+			value = "select distinct i.* from images as i INNER JOIN image_tags as it ON i.id = it.tags_fkey where it.tag = ANY(:objects)")
 	List<Image> findAllByTags(@Param("objects") String[] objects);
 
 }

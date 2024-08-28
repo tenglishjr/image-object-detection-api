@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.imageobjectdetectionapi.exception.ImaggaBadRequestException;
 import org.example.imageobjectdetectionapi.model.ImageRequest;
 import org.example.imageobjectdetectionapi.model.ImaggaWebResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,13 +24,19 @@ import java.util.Base64;
 @Slf4j
 public class ImaggaService {
 
+    @Value("${imaggaApiKey}")
+    private String IMAGGA_KEY;
+
+    @Value("${imaggaApiSecret}")
+    private String IMAGGA_SECRET;
+
     // TODO: Refactor to use RestTemplate/WebClient instead
     public ImaggaWebResponse getObjectDetection(ImageRequest imageRequest) {
         try {
             String url = "https://api.imagga.com/v2/tags?image_url=" + imageRequest.getImageUrl() + "&limit=10";
             URL urlObject = new URL(url);
 
-            String credentialsToEncode = "acc_343f1665680cff0" + ":" + "30e0f9ea940d10a99d4fab53a1870d58";
+            String credentialsToEncode = IMAGGA_KEY + ":" + IMAGGA_SECRET;
             String basicAuth = Base64.getEncoder().encodeToString(credentialsToEncode.getBytes(StandardCharsets.UTF_8));
             HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
 
